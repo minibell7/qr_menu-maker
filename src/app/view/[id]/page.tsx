@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import { UtensilsCrossed } from "lucide-react";
 import { Restaurant, MenuItem } from "@/types";
+import { headers } from "next/headers";
+import { dictionary } from "@/constants/dictionaries";
 
 interface Props {
     params: Promise<{
@@ -11,6 +13,12 @@ interface Props {
 export default async function ViewPage({ params }: Props) {
     const supabase = await createClient();
     const { id } = await params;
+
+    // Simple server-side language detection
+    const headersList = await headers();
+    const acceptLanguage = headersList.get('accept-language');
+    const lang = acceptLanguage?.startsWith('en') ? 'en' : 'ko';
+    const t = dictionary[lang];
 
     // Fetch restaurant and menus
     const { data: restaurant, error } = await supabase
@@ -27,10 +35,10 @@ export default async function ViewPage({ params }: Props) {
                         <UtensilsCrossed className="w-8 h-8" />
                     </div>
                     <h1 className="text-xl font-bold text-gray-900 mb-2">
-                        메뉴를 불러올 수 없습니다
+                        {t.view.errorTitle}
                     </h1>
                     <p className="text-gray-500">
-                        존재하지 않는 식당이거나 삭제되었습니다.
+                        {t.view.errorDesc}
                     </p>
                 </div>
             </div>
@@ -38,6 +46,7 @@ export default async function ViewPage({ params }: Props) {
     }
 
     const menus = (restaurant.menus as MenuItem[]).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0));
+    const currency = restaurant.currency || 'KRW';
 
     return (
         <div className="min-h-screen bg-gray-50 pb-10">
@@ -66,19 +75,21 @@ export default async function ViewPage({ params }: Props) {
                                     </p>
                                 )}
                                 <div className="font-semibold text-blue-600">
-                                    {item.price.toLocaleString()}원
+                                    {currency === 'KRW'
+                                        ? `${item.price.toLocaleString()}원`
+                                        : `$${item.price.toLocaleString()}`}
                                 </div>
                             </div>
                         </div>
                     ))
                 ) : (
                     <div className="text-center text-gray-500 py-10">
-                        등록된 메뉴가 없습니다.
+                        {t.view.noMenu}
                     </div>
                 )}
 
                 <div className="text-center text-xs text-gray-400 mt-8 pb-4">
-                    Powered by QR Menu Maker
+                    {t.view.poweredBy}
                 </div>
             </main>
         </div>

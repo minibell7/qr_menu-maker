@@ -4,6 +4,7 @@ export interface MenuItem {
     name: string;
     price: number;
     description?: string;
+    order_index?: number;
 }
 
 export interface Restaurant {
@@ -11,5 +12,6 @@ export interface Restaurant {
     user_id: string;
     name: string;
     created_at: string;
+    currency?: string;
     menus?: MenuItem[];
 }
