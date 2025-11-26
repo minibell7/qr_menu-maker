@@ -37,18 +37,12 @@ export async function updateSession(request: NextRequest) {
         data: { user },
     } = await supabase.auth.getUser()
 
-    if (
-        !user &&
-        !request.nextUrl.pathname.startsWith('/login') &&
-        !request.nextUrl.pathname.startsWith('/auth') &&
-        !request.nextUrl.pathname.startsWith('/view') && // Allow viewing menus without login
-        request.nextUrl.pathname !== '/' // Allow landing page
-    ) {
-        // no user, potentially respond by redirecting the user to the login page
-        const url = request.nextUrl.clone()
-        url.pathname = '/login'
-        return NextResponse.redirect(url)
-    }
+    // Redirect logic removed to allow background guest login
+    // if (
+    //     !user &&
+    //     !request.nextUrl.pathname.startsWith('/login') &&
+    //     ...
+    // ) { ... }
 
     return supabaseResponse
 }
