@@ -2,8 +2,8 @@ export const dictionary = {
     ko: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "나만의 식당 메뉴판을 만들고 QR코드로 공유하세요.",
-            cta: "메뉴판 만들기 시작하기",
+            subtitle: "나만의 식당 메뉴판을 무료로 만들고 QR코드로 공유하세요.",
+            cta: "무료로 메뉴판 만들기 시작하기",
         },
         admin: {
             editTitle: "메뉴판 수정하기",
@@ -46,8 +46,8 @@ export const dictionary = {
     en: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Create your own restaurant menu and share via QR code.",
-            cta: "Start Creating Menu",
+            subtitle: "Create your own restaurant menu for free and share via QR code.",
+            cta: "Start Creating Menu for Free",
         },
         admin: {
             editTitle: "Edit Menu",
@@ -90,8 +90,8 @@ export const dictionary = {
     ja: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "自分だけのレストランメニューを作成し、QRコードで共有しましょう。",
-            cta: "メニュー作成を開始",
+            subtitle: "自分だけのレストランメニューを無料で作成し、QRコードで共有しましょう。",
+            cta: "無料でメニュー作成を開始",
         },
         admin: {
             editTitle: "メニューを編集",
@@ -134,8 +134,8 @@ export const dictionary = {
     es: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Crea tu propio menú de restaurante y compártelo vía código QR.",
-            cta: "Comenzar a Crear Menú",
+            subtitle: "Crea tu propio menú de restaurante gratis y compártelo vía código QR.",
+            cta: "Comenzar a Crear Menú Gratis",
         },
         admin: {
             editTitle: "Editar Menú",
@@ -178,8 +178,8 @@ export const dictionary = {
     pt: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Crie seu próprio cardápio de restaurante e compartilhe via código QR.",
-            cta: "Começar a Criar Menu",
+            subtitle: "Crie seu próprio cardápio de restaurante grátis e compartilhe via código QR.",
+            cta: "Começar a Criar Menu Grátis",
         },
         admin: {
             editTitle: "Editar Menu",
@@ -222,8 +222,8 @@ export const dictionary = {
     hi: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "अपना खुद का रेस्तरां मेनू बनाएं और QR कोड के माध्यम से साझा करें।",
-            cta: "मेनू बनाना शुरू करें",
+            subtitle: "अपना खुद का रेस्तरां मेनू मुफ्त में बनाएं और QR कोड के माध्यम से साझा करें।",
+            cta: "मुफ्त में मेनू बनाना शुरू करें",
         },
         admin: {
             editTitle: "मेनू संपादित करें",
@@ -266,8 +266,8 @@ export const dictionary = {
     'zh-CN': {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "创建您自己的餐厅菜单并通过二维码分享。",
-            cta: "开始创建菜单",
+            subtitle: "免费创建您自己的餐厅菜单并通过二维码分享。",
+            cta: "开始免费创建菜单",
         },
         admin: {
             editTitle: "编辑菜单",
@@ -310,8 +310,8 @@ export const dictionary = {
     'zh-TW': {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "建立您自己的餐廳菜單並透過 QR Code 分享。",
-            cta: "開始建立菜單",
+            subtitle: "免費建立您自己的餐廳菜單並透過 QR Code 分享。",
+            cta: "開始免費建立菜單",
         },
         admin: {
             editTitle: "編輯菜單",
@@ -354,8 +354,8 @@ export const dictionary = {
     fr: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Créez votre propre menu de restaurant et partagez-le via QR code.",
-            cta: "Commencer à Créer le Menu",
+            subtitle: "Créez votre propre menu de restaurant gratuitement et partagez-le via QR code.",
+            cta: "Commencer à Créer le Menu Gratuitement",
         },
         admin: {
             editTitle: "Modifier le Menu",
@@ -398,8 +398,8 @@ export const dictionary = {
     de: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Erstellen Sie Ihre eigene Speisekarte und teilen Sie sie per QR-Code.",
-            cta: "Speisekarte erstellen",
+            subtitle: "Erstellen Sie Ihre eigene Speisekarte kostenlos und teilen Sie sie per QR-Code.",
+            cta: "Speisekarte kostenlos erstellen",
         },
         admin: {
             editTitle: "Speisekarte bearbeiten",
@@ -442,8 +442,8 @@ export const dictionary = {
     it: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Crea il tuo menu del ristorante e condividilo tramite codice QR.",
-            cta: "Inizia a Creare il Menu",
+            subtitle: "Crea il tuo menu del ristorante gratuitamente e condividilo tramite codice QR.",
+            cta: "Inizia a Creare il Menu Gratuitamente",
         },
         admin: {
             editTitle: "Modifica Menu",
@@ -486,8 +486,8 @@ export const dictionary = {
     ru: {
         landing: {
             title: "QR Menu Maker",
-            subtitle: "Создайте свое меню ресторана и поделитесь им через QR-код.",
-            cta: "Создать меню",
+            subtitle: "Создайте свое меню ресторана бесплатно и поделитесь им через QR-код.",
+            cta: "Создать меню бесплатно",
         },
         admin: {
             editTitle: "Редактировать меню",
