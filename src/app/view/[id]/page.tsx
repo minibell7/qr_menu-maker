@@ -94,7 +94,7 @@ export default async function ViewPage({ params }: Props) {
                         href="/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-blue-600 transition-colors border-b border-transparent hover:border-blue-600 pb-0.5"
+                        className="inline-flex items-center gap-1 text-xs text-blue-600 border-b border-blue-600 pb-0.5"
                     >
                         {t.view.createOwn}
                     </a>
