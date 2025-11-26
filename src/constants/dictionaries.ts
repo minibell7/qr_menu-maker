@@ -40,6 +40,7 @@ export const dictionary = {
             errorDesc: "존재하지 않는 식당이거나 삭제되었습니다.",
             noMenu: "등록된 메뉴가 없습니다.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "나만의 QR 메뉴판 무료로 만들기",
         }
     },
     en: {
@@ -83,6 +84,7 @@ export const dictionary = {
             errorDesc: "This restaurant does not exist or has been deleted.",
             noMenu: "No menu items available.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Create your own QR Menu for Free",
         }
     },
     ja: {
@@ -126,6 +128,7 @@ export const dictionary = {
             errorDesc: "このレストランは存在しないか、削除されました。",
             noMenu: "メニューが登録されていません。",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "自分だけのQRメニューを無料で作る",
         }
     },
     es: {
@@ -169,6 +172,7 @@ export const dictionary = {
             errorDesc: "Este restaurante no existe o ha sido eliminado.",
             noMenu: "No hay elementos disponibles.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Crea tu propio menú QR gratis",
         }
     },
     pt: {
@@ -212,6 +216,7 @@ export const dictionary = {
             errorDesc: "Este restaurante não existe ou foi excluído.",
             noMenu: "Nenhum item disponível.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Crie seu próprio menu QR grátis",
         }
     },
     hi: {
@@ -255,6 +260,7 @@ export const dictionary = {
             errorDesc: "यह रेस्तरां मौजूद नहीं है या हटा दिया गया है।",
             noMenu: "कोई आइटम उपलब्ध नहीं है।",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "अपना खुद का QR मेनू मुफ्त में बनाएं",
         }
     },
     'zh-CN': {
@@ -298,6 +304,7 @@ export const dictionary = {
             errorDesc: "该餐厅不存在或已被删除。",
             noMenu: "暂无可用菜品。",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "免费创建您自己的二维码菜单",
         }
     },
     'zh-TW': {
@@ -341,6 +348,7 @@ export const dictionary = {
             errorDesc: "該餐廳不存在或已被刪除。",
             noMenu: "尚無可用菜色。",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "免費建立您自己的 QR Code 菜單",
         }
     },
     fr: {
@@ -384,6 +392,7 @@ export const dictionary = {
             errorDesc: "Ce restaurant n'existe pas ou a été supprimé.",
             noMenu: "Aucun plat disponible.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Créez votre propre menu QR gratuitement",
         }
     },
     de: {
@@ -427,6 +436,7 @@ export const dictionary = {
             errorDesc: "Dieses Restaurant existiert nicht oder wurde gelöscht.",
             noMenu: "Keine Gerichte verfügbar.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Erstellen Sie Ihr eigenes QR-Menü kostenlos",
         }
     },
     it: {
@@ -470,6 +480,7 @@ export const dictionary = {
             errorDesc: "Questo ristorante non esiste o è stato eliminato.",
             noMenu: "Nessun piatto disponibile.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Crea il tuo menu QR gratuitamente",
         }
     },
     ru: {
@@ -513,6 +524,7 @@ export const dictionary = {
             errorDesc: "Этот ресторан не существует или был удален.",
             noMenu: "Нет доступных блюд.",
             poweredBy: "Powered by QR Menu Maker",
+            createOwn: "Создайте свое QR-меню бесплатно",
         }
     }
 };
