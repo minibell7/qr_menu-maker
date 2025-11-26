@@ -11,19 +11,26 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const signInAnonymously = async () => {
+        const handleLogin = async () => {
+            // 1. Check if already logged in
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                router.replace("/dashboard");
+                return;
+            }
+
+            // 2. Sign in anonymously
             const { error } = await supabase.auth.signInAnonymously();
 
             if (error) {
                 console.error("Error signing in anonymously:", error);
                 setError("게스트 로그인 중 오류가 발생했습니다. 관리자에게 문의하세요.");
             } else {
-                router.refresh();
-                router.push("/dashboard");
+                router.replace("/dashboard");
             }
         };
 
-        signInAnonymously();
+        handleLogin();
     }, [router, supabase]);
 
     return (
