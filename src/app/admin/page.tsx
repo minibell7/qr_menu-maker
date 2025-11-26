@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Save, Loader2, ArrowLeft } from "lucide-react";
+import { Plus, Trash2, Save, Loader2, ArrowLeft, ArrowUp, ArrowDown } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 interface TempMenuItem {
@@ -11,10 +11,13 @@ interface TempMenuItem {
     name: string;
     price: number;
     description: string;
+    order_index?: number;
 }
 
 export default function AdminPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const idParam = searchParams.get("id");
     const supabase = createClient();
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState<any>(null);
@@ -39,28 +42,44 @@ export default function AdminPage() {
             }
             setUser(user);
 
-            // Fetch existing restaurant
-            const { data: restaurant } = await supabase
+            // Fetch logic:
+            // 1. If ID param exists, fetch that specific restaurant.
+            // 2. If NO ID param, check if user ALREADY has a restaurant.
+            //    If yes, load it (enforce single menu).
+            //    If no, stay in create mode.
+
+            let query = supabase
                 .from("restaurants")
-                .select("*, menus(*)")
-                .eq("user_id", user.id)
-                .single();
+                .select("*, menus(*)");
+
+            if (idParam) {
+                query = query.eq("id", idParam);
+            } else {
+                // Enforce single menu: check if ANY restaurant exists for this user
+                query = query.eq("user_id", user.id);
+            }
+
+            const { data: restaurants, error } = await query;
+
+            // If we found a restaurant (either by ID or just by user_id)
+            const restaurant = restaurants && restaurants[0];
 
             if (restaurant) {
                 setRestaurantId(restaurant.id);
                 setRestaurantName(restaurant.name);
                 if (restaurant.menus) {
                     setMenuItems(restaurant.menus.map((m: any) => ({
-                        id: m.id, // Keep original ID if possible, or we can just treat them as new for simplicity in update
+                        id: m.id,
                         name: m.name,
                         price: m.price,
-                        description: m.description || ""
-                    })));
+                        description: m.description || "",
+                        order_index: m.order_index || 0
+                    })).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0)));
                 }
             }
         };
         checkUserAndFetchData();
-    }, [router, supabase]);
+    }, [router, supabase, idParam]);
 
     const addMenuItem = () => {
         if (!newItemName || !newItemPrice) return;
@@ -82,6 +101,17 @@ export default function AdminPage() {
 
     const removeMenuItem = (id: string) => {
         setMenuItems(menuItems.filter((item) => item.id !== id));
+    };
+
+    const moveItem = (index: number, direction: 'up' | 'down') => {
+        if (direction === 'up' && index === 0) return;
+        if (direction === 'down' && index === menuItems.length - 1) return;
+
+        const newItems = [...menuItems];
+        const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+        [newItems[index], newItems[targetIndex]] = [newItems[targetIndex], newItems[index]];
+        setMenuItems(newItems);
     };
 
     const saveRestaurant = async () => {
@@ -120,11 +150,12 @@ export default function AdminPage() {
                 await supabase.from("menus").delete().eq("restaurant_id", currentRestaurantId);
 
                 // Insert new menus
-                const menusToInsert = menuItems.map(item => ({
+                const menusToInsert = menuItems.map((item, index) => ({
                     restaurant_id: currentRestaurantId,
                     name: item.name,
                     price: item.price,
                     description: item.description,
+                    order_index: index
                 }));
 
                 const { error: mError } = await supabase
@@ -286,12 +317,12 @@ export default function AdminPage() {
                                 </div>
                             ) : (
                                 <div className="space-y-4">
-                                    {menuItems.map((item) => (
+                                    {menuItems.map((item, index) => (
                                         <div
                                             key={item.id}
-                                            className="flex justify-between items-start p-3 bg-gray-50 rounded-lg group hover:bg-gray-100 transition-colors"
+                                            className="flex justify-between items-center p-3 bg-gray-50 rounded-lg group hover:bg-gray-100 transition-colors"
                                         >
-                                            <div>
+                                            <div className="flex-1">
                                                 <div className="font-bold text-gray-900">{item.name}</div>
                                                 {item.description && (
                                                     <div className="text-sm text-gray-500 mt-1">{item.description}</div>
@@ -300,13 +331,31 @@ export default function AdminPage() {
                                                     {item.price.toLocaleString()}원
                                                 </div>
                                             </div>
-                                            <button
-                                                onClick={() => removeMenuItem(item.id)}
-                                                className="text-gray-400 hover:text-red-500 p-1 opacity-0 group-hover:opacity-100 transition-all"
-                                                aria-label="Delete menu item"
-                                            >
-                                                <Trash2 className="w-5 h-5" />
-                                            </button>
+                                            <div className="flex items-center gap-2">
+                                                <div className="flex flex-col gap-1">
+                                                    <button
+                                                        onClick={() => moveItem(index, 'up')}
+                                                        disabled={index === 0}
+                                                        className="p-1 text-gray-400 hover:text-blue-600 disabled:opacity-30 disabled:hover:text-gray-400"
+                                                    >
+                                                        <ArrowUp className="w-4 h-4" />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => moveItem(index, 'down')}
+                                                        disabled={index === menuItems.length - 1}
+                                                        className="p-1 text-gray-400 hover:text-blue-600 disabled:opacity-30 disabled:hover:text-gray-400"
+                                                    >
+                                                        <ArrowDown className="w-4 h-4" />
+                                                    </button>
+                                                </div>
+                                                <button
+                                                    onClick={() => removeMenuItem(item.id)}
+                                                    className="text-gray-400 hover:text-red-500 p-2 opacity-0 group-hover:opacity-100 transition-all"
+                                                    aria-label="Delete menu item"
+                                                >
+                                                    <Trash2 className="w-5 h-5" />
+                                                </button>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

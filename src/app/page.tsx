@@ -12,7 +12,7 @@ export default function Home() {
         </p>
 
         <Link
-          href="/admin"
+          href="/dashboard"
           className="px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
         >
           메뉴판 만들기 시작하기

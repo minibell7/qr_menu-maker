@@ -37,7 +37,7 @@ export default async function ViewPage({ params }: Props) {
         );
     }
 
-    const menus = restaurant.menus as MenuItem[];
+    const menus = (restaurant.menus as MenuItem[]).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0));
 
     return (
         <div className="min-h-screen bg-gray-50 pb-10">

@@ -58,7 +58,7 @@ export default async function DashboardPage() {
                                         </p>
                                     </div>
                                     <Link
-                                        href="/admin"
+                                        href={`/admin?id=${restaurant.id}`}
                                         className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium transition-colors"
                                     >
                                         <Settings className="w-4 h-4" />
