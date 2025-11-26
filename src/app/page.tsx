@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Globe } from "lucide-react";
