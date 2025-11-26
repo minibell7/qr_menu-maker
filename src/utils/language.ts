@@ -8,6 +8,9 @@ export const getLanguageName = (lang: Language) => {
         case 'es': return 'Español';
         case 'pt': return 'Português';
         case 'hi': return 'हिन्दी';
+        case 'zh-CN': return '简体中文';
+        case 'zh-TW': return '繁體中文';
+        case 'fr': return 'Français';
         default: return 'English';
     }
 };
