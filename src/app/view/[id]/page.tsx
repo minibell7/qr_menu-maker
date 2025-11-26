@@ -49,11 +49,11 @@ export default async function ViewPage({ params }: Props) {
     const menus = (restaurant.menus as MenuItem[]).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0));
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-10">
+        <div className="min-h-screen pb-10">
             {/* Header */}
-            <header className="bg-white shadow-sm sticky top-0 z-10">
+            <header className="bg-white/10 backdrop-blur-md border-b border-white/10 sticky top-0 z-10 shadow-lg">
                 <div className="max-w-md mx-auto px-4 h-16 flex items-center justify-center">
-                    <h1 className="font-bold text-lg text-gray-900 truncate">
+                    <h1 className="font-bold text-lg text-white truncate">
                         {restaurant.name}
                     </h1>
                 </div>
@@ -66,18 +66,18 @@ export default async function ViewPage({ params }: Props) {
                         {menus.map((item) => (
                             <div
                                 key={item.id}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-start gap-4"
+                                className="bg-white/10 backdrop-blur-sm p-5 rounded-2xl shadow-lg border border-white/10 flex justify-between items-start gap-4"
                             >
                                 <div className="flex-1">
-                                    <div className="font-bold text-gray-900 text-lg mb-1">
+                                    <div className="font-bold text-white text-lg mb-1">
                                         {item.name}
                                     </div>
                                     {item.description && (
-                                        <p className="text-gray-500 text-sm leading-relaxed mb-2">
+                                        <p className="text-gray-300 text-sm leading-relaxed mb-2">
                                             {item.description}
                                         </p>
                                     )}
-                                    <div className="font-semibold text-blue-600">
+                                    <div className="font-bold text-blue-300 text-lg">
                                         {item.price.toLocaleString()}
                                     </div>
                                 </div>
@@ -85,17 +85,17 @@ export default async function ViewPage({ params }: Props) {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center text-gray-500 py-10">
+                    <div className="text-center text-gray-400 py-10">
                         {t.view.noMenu}
                     </div>
                 )}
 
-                <div className="text-center mt-8 pb-8">
+                <div className="text-center mt-12 pb-8">
                     <a
                         href="/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-blue-600 border-b border-blue-600 pb-0.5"
+                        className="inline-flex items-center gap-1 text-sm text-blue-300 hover:text-blue-200 transition-colors border-b border-blue-300/50 hover:border-blue-200 pb-0.5"
                     >
                         {t.view.createOwn}
                     </a>

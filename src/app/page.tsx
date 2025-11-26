@@ -33,20 +33,25 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-gray-50 relative">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 relative overflow-hidden">
+      {/* Ambient Background Glow */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm flex flex-col gap-8">
-        <h1 className="text-4xl font-bold text-center text-gray-900">
-          {t.landing.title}
-        </h1>
-        <p className="text-xl text-center text-gray-600">
-          {t.landing.subtitle}
-        </p>
+      <div className="z-10 max-w-md w-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-8 text-center">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold text-white tracking-tight">
+            {t.landing.title}
+          </h1>
+          <p className="text-gray-300 text-lg">
+            {t.landing.subtitle}
+          </p>
+        </div>
 
         <button
           onClick={handleStart}
           disabled={isLoading}
-          className="px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-blue-400 flex items-center gap-2"
+          className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl text-lg font-bold shadow-lg transform transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
           {t.landing.cta}
