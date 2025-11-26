@@ -258,35 +258,7 @@ function AdminPageContent() {
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                        {t.admin.currency}
-                    </label>
-                    <div className="flex gap-4">
-                        <label className="flex items-center gap-2 cursor-pointer">
-                            <input
-                                type="radio"
-                                name="currency"
-                                value="KRW"
-                                checked={currency === "KRW"}
-                                onChange={(e) => setCurrency(e.target.value)}
-                                className="w-4 h-4 text-blue-600"
-                            />
-                            <span>KRW (원)</span>
-                        </label>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                            <input
-                                type="radio"
-                                name="currency"
-                                value="USD"
-                                checked={currency === "USD"}
-                                onChange={(e) => setCurrency(e.target.value)}
-                                className="w-4 h-4 text-blue-600"
-                            />
-                            <span>USD ($)</span>
-                        </label>
-                    </div>
-                </div>
+
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -313,7 +285,7 @@ function AdminPageContent() {
 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    {t.admin.price} ({currency})
+                                    {t.admin.price}
                                 </label>
                                 <input
                                     type="number"
@@ -373,9 +345,7 @@ function AdminPageContent() {
                                                 <div className="text-sm text-gray-500 mt-1">{item.description}</div>
                                             )}
                                             <div className="text-blue-600 font-semibold mt-1">
-                                                {currency === 'KRW'
-                                                    ? `${item.price.toLocaleString()}원`
-                                                    : `$${item.price.toLocaleString()}`}
+                                                {item.price.toLocaleString()}
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
