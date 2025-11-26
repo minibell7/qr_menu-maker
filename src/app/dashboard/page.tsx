@@ -11,7 +11,7 @@ export default async function DashboardPage() {
     } = await supabase.auth.getUser();
 
     if (!user) {
-        return redirect("/login");
+        return redirect("/");
     }
 
     const { data: restaurants } = await supabase

@@ -247,7 +247,7 @@ function AdminPageContent() {
             {/* Restaurant Name Section */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
                         {t.admin.restaurantName}
                     </label>
                     <input
@@ -255,7 +255,7 @@ function AdminPageContent() {
                         value={restaurantName}
                         onChange={(e) => setRestaurantName(e.target.value)}
                         placeholder={t.admin.restaurantNamePlaceholder}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-black placeholder:text-gray-400"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-black placeholder:text-gray-500 font-medium"
                     />
                 </div>
 
@@ -271,7 +271,7 @@ function AdminPageContent() {
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-bold text-gray-900 mb-1">
                                     {t.admin.menuName}
                                 </label>
                                 <input
@@ -279,12 +279,12 @@ function AdminPageContent() {
                                     value={newItemName}
                                     onChange={(e) => setNewItemName(e.target.value)}
                                     placeholder={t.admin.menuNamePlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-400"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-500 font-medium"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-bold text-gray-900 mb-1">
                                     {t.admin.price}
                                 </label>
                                 <input
@@ -292,19 +292,19 @@ function AdminPageContent() {
                                     value={newItemPrice}
                                     onChange={(e) => setNewItemPrice(e.target.value)}
                                     placeholder={t.admin.pricePlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-400"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-500 font-medium"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-bold text-gray-900 mb-1">
                                     {t.admin.description}
                                 </label>
                                 <textarea
                                     value={newItemDesc}
                                     onChange={(e) => setNewItemDesc(e.target.value)}
                                     placeholder={t.admin.descriptionPlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20 text-black placeholder:text-gray-400"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20 text-black placeholder:text-gray-500 font-medium"
                                 />
                             </div>
 
