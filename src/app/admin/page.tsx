@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Plus, Trash2, Save, Loader2, ArrowLeft, ArrowUp, ArrowDown } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ interface TempMenuItem {
     order_index?: number;
 }
 
-export default function AdminPage() {
+function AdminPageContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
@@ -378,5 +378,17 @@ export default function AdminPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function AdminPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
+            </div>
+        }>
+            <AdminPageContent />
+        </Suspense>
     );
 }
