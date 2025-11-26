@@ -15,7 +15,12 @@ export function useLanguage() {
     }, []);
 
     const toggleLanguage = () => {
-        setLanguage(prev => prev === 'ko' ? 'en' : 'ko');
+        setLanguage(prev => {
+            const languages: Language[] = ['ko', 'en', 'ja', 'es', 'pt', 'hi'];
+            const currentIndex = languages.indexOf(prev);
+            const nextIndex = (currentIndex + 1) % languages.length;
+            return languages[nextIndex];
+        });
     };
 
     return {
