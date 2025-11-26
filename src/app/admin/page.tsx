@@ -255,7 +255,7 @@ function AdminPageContent() {
                         value={restaurantName}
                         onChange={(e) => setRestaurantName(e.target.value)}
                         placeholder={t.admin.restaurantNamePlaceholder}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-black placeholder:text-gray-400"
                     />
                 </div>
 
@@ -279,7 +279,7 @@ function AdminPageContent() {
                                     value={newItemName}
                                     onChange={(e) => setNewItemName(e.target.value)}
                                     placeholder={t.admin.menuNamePlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-400"
                                 />
                             </div>
 
@@ -292,7 +292,7 @@ function AdminPageContent() {
                                     value={newItemPrice}
                                     onChange={(e) => setNewItemPrice(e.target.value)}
                                     placeholder={t.admin.pricePlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-black placeholder:text-gray-400"
                                 />
                             </div>
 
@@ -304,7 +304,7 @@ function AdminPageContent() {
                                     value={newItemDesc}
                                     onChange={(e) => setNewItemDesc(e.target.value)}
                                     placeholder={t.admin.descriptionPlaceholder}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20 text-black placeholder:text-gray-400"
                                 />
                             </div>
 
