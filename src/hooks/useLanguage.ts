@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 import { dictionary, Language } from '@/constants/dictionaries';
 
+import { getLanguageFromCode } from '@/utils/language';
+
 export function useLanguage() {
     const [language, setLanguage] = useState<Language>('ko');
 
     useEffect(() => {
-        // Simple browser language detection
-        const browserLang = navigator.language.split('-')[0];
-        if (browserLang === 'en') {
-            setLanguage('en');
-        }
+        // Robust browser language detection
+        const detected = getLanguageFromCode(navigator.language);
+        setLanguage(detected);
     }, []);
 
     const toggleLanguage = () => {
