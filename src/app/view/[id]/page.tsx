@@ -89,8 +89,15 @@ export default async function ViewPage({ params }: Props) {
                     </div>
                 )}
 
-                <div className="text-center text-xs text-gray-400 mt-8 pb-4">
-                    {t.view.poweredBy}
+                <div className="text-center mt-8 pb-8">
+                    <a
+                        href="/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-blue-600 transition-colors border-b border-transparent hover:border-blue-600 pb-0.5"
+                    >
+                        {t.view.createOwn}
+                    </a>
                 </div>
             </main>
         </div>
