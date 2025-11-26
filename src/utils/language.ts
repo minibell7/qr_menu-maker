@@ -11,6 +11,9 @@ export const getLanguageName = (lang: Language) => {
         case 'zh-CN': return '简体中文';
         case 'zh-TW': return '繁體中文';
         case 'fr': return 'Français';
+        case 'de': return 'Deutsch';
+        case 'it': return 'Italiano';
+        case 'ru': return 'Русский';
         default: return 'English';
     }
 };
