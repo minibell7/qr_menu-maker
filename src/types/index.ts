@@ -5,6 +5,8 @@ export interface MenuItem {
     price: number;
     description?: string;
     order_index?: number;
+    category?: string;
+    image_url?: string;
 }
 
 export interface Restaurant {

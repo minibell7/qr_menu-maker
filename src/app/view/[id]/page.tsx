@@ -4,6 +4,7 @@ import { Restaurant, MenuItem } from "@/types";
 import { headers } from "next/headers";
 import { dictionary } from "@/constants/dictionaries";
 import { getLanguageFromCode } from "@/utils/language";
+import { MenuView } from "@/components/menu-view/MenuView";
 
 interface Props {
     params: Promise<{
@@ -46,61 +47,31 @@ export default async function ViewPage({ params }: Props) {
         );
     }
 
-    const menus = (restaurant.menus as MenuItem[]).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0));
+    // Group menus by category
+    const flatMenus = (restaurant.menus as MenuItem[]).sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0));
 
-    return (
-        <div className="min-h-screen bg-gray-50 pb-10">
-            {/* Header */}
-            <header className="bg-white shadow-sm sticky top-0 z-10">
-                <div className="max-w-md mx-auto px-4 h-16 flex items-center justify-center">
-                    <h1 className="font-bold text-lg text-gray-900 truncate">
-                        {restaurant.name}
-                    </h1>
-                </div>
-            </header>
+    const grouped: Record<string, MenuItem[]> = {};
+    flatMenus.forEach(item => {
+        const cat = item.category || "Uncategorized";
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push(item);
+    });
 
-            {/* Menu List */}
-            <main className="max-w-md mx-auto px-4 py-6">
-                {menus.length > 0 ? (
-                    <div className="space-y-4">
-                        {menus.map((item) => (
-                            <div
-                                key={item.id}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-start gap-4"
-                            >
-                                <div className="flex-1">
-                                    <div className="font-bold text-gray-900 text-lg mb-1">
-                                        {item.name}
-                                    </div>
-                                    {item.description && (
-                                        <p className="text-gray-500 text-sm leading-relaxed mb-2">
-                                            {item.description}
-                                        </p>
-                                    )}
-                                    <div className="font-semibold text-blue-600">
-                                        {item.price.toLocaleString()}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center text-gray-500 py-10">
-                        {t.view.noMenu}
-                    </div>
-                )}
+    // Convert to array format expected by MenuView
+    // We might want to sort categories if we had an order, but for now alphabetical or insertion order
+    // If we want to preserve the order from the builder, we need to save category order in DB.
+    // For now, let's just use Object.entries which is roughly insertion order for string keys (except numbers).
+    const categories = Object.entries(grouped).map(([name, items]) => ({
+        id: name,
+        name,
+        items
+    }));
 
-                <div className="text-center mt-8 pb-8">
-                    <a
-                        href="/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-blue-600 border-b border-blue-600 pb-0.5"
-                    >
-                        {t.view.createOwn}
-                    </a>
-                </div>
-            </main>
-        </div>
-    );
+    // If no categories, create a default one
+    if (categories.length === 0 && flatMenus.length > 0) {
+        categories.push({ id: "default", name: "Menu", items: flatMenus });
+    }
+
+    return <MenuView restaurant={restaurant} categories={categories} />;
 }
+

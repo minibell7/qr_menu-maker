@@ -1,18 +1,17 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Plus, Settings, QrCode, ExternalLink } from "lucide-react";
+import { Plus, Settings, QrCode, ExternalLink, UtensilsCrossed } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 export default async function DashboardPage() {
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-        return redirect("/");
-    }
+    if (!user) return redirect("/");
 
     const { data: restaurants } = await supabase
         .from("restaurants")
@@ -21,93 +20,91 @@ export default async function DashboardPage() {
         .order("created_at", { ascending: false });
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <nav className="bg-white shadow-sm border-b border-gray-200">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex items-center">
-                            <h1 className="text-xl font-bold text-gray-900">내 메뉴판 관리</h1>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <span className="text-sm text-gray-500">{user.email}</span>
-                            <form action="/auth/signout" method="post">
-                                <button className="text-sm text-gray-500 hover:text-gray-700">
-                                    로그아웃
-                                </button>
-                            </form>
-                        </div>
+        <div className="min-h-screen bg-background p-8">
+            <div className="max-w-6xl mx-auto space-y-8">
+                {/* Header */}
+                <div className="flex justify-between items-center">
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+                        <p className="text-muted-foreground">Manage your menus and restaurants.</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <span className="text-sm text-muted-foreground">{user.email}</span>
+                        <form action="/auth/signout" method="post">
+                            <Button variant="outline" size="sm">Sign Out</Button>
+                        </form>
                     </div>
                 </div>
-            </nav>
 
-            <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {restaurants && restaurants.length > 0 ? (
-                    <div className="max-w-2xl mx-auto">
-                        {restaurants.map((restaurant) => (
-                            <div
-                                key={restaurant.id}
-                                className="bg-white rounded-xl shadow-sm border border-gray-200 p-8"
-                            >
-                                <div className="flex justify-between items-start mb-6">
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                                            {restaurant.name}
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            생성일: {new Date(restaurant.created_at).toLocaleDateString()}
-                                        </p>
-                                    </div>
-                                    <Link
-                                        href={`/admin?id=${restaurant.id}`}
-                                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium transition-colors"
-                                    >
-                                        <Settings className="w-4 h-4" />
-                                        수정하기
-                                    </Link>
-                                </div>
+                <Separator />
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <Link
-                                        href={`/view/${restaurant.id}`}
-                                        target="_blank"
-                                        className="flex items-center justify-center gap-2 px-4 py-4 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 font-semibold transition-colors"
-                                    >
-                                        <ExternalLink className="w-5 h-5" />
-                                        메뉴판 보기
-                                    </Link>
-                                    <Link
-                                        href={`/share/${restaurant.id}`}
-                                        className="flex items-center justify-center gap-2 px-4 py-4 bg-green-50 text-green-700 rounded-xl hover:bg-green-100 font-semibold transition-colors"
-                                    >
-                                        <QrCode className="w-5 h-5" />
-                                        QR 코드
-                                    </Link>
-                                </div>
+                {/* Stats Overview (Placeholder) */}
+                <div className="grid gap-4 md:grid-cols-3">
+                    <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">Total Menus</CardTitle>
+                            <UtensilsCrossed className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">{restaurants?.length || 0}</div>
+                        </CardContent>
+                    </Card>
+                    {/* Add more stats here */}
+                </div>
+
+                {/* Restaurants Grid */}
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {/* Create New Card */}
+                    <Card className="flex flex-col items-center justify-center border-dashed border-2 hover:border-primary/50 transition-colors cursor-pointer min-h-[300px] bg-muted/50 hover:bg-muted">
+                        <Link href="/admin" className="flex flex-col items-center justify-center w-full h-full p-6">
+                            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                <Plus className="h-6 w-6 text-primary" />
                             </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center max-w-2xl mx-auto">
-                        <div className="mx-auto w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6">
-                            <Plus className="w-10 h-10 text-blue-500" />
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">
-                            나만의 메뉴판을 만들어보세요
-                        </h3>
-                        <p className="text-gray-500 mb-8">
-                            메뉴를 등록하고 QR코드를 생성하여<br />
-                            고객에게 스마트한 메뉴판을 제공할 수 있습니다.
-                        </p>
-                        <Link
-                            href="/admin"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition-transform active:scale-[0.98]"
-                        >
-                            <Plus className="w-6 h-6" />
-                            메뉴판 만들기 시작하기
+                            <h3 className="font-semibold text-lg">Create New Menu</h3>
+                            <p className="text-sm text-muted-foreground text-center mt-2">
+                                Start building your digital menu
+                            </p>
                         </Link>
-                    </div>
-                )}
-            </main>
+                    </Card>
+
+                    {restaurants?.map((restaurant) => (
+                        <Card key={restaurant.id} className="flex flex-col hover:shadow-lg transition-shadow duration-300">
+                            <CardHeader>
+                                <CardTitle>{restaurant.name}</CardTitle>
+                                <CardDescription>
+                                    Created {new Date(restaurant.created_at).toLocaleDateString()}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex-1">
+                                <div className="flex gap-2">
+                                    <Badge variant="secondary">Active</Badge>
+                                    {restaurant.currency && <Badge variant="outline">{restaurant.currency}</Badge>}
+                                </div>
+                            </CardContent>
+                            <CardFooter className="grid grid-cols-3 gap-2">
+                                <Button asChild variant="outline" size="sm" className="w-full">
+                                    <Link href={`/admin?id=${restaurant.id}`}>
+                                        <Settings className="h-4 w-4 mr-2" />
+                                        Edit
+                                    </Link>
+                                </Button>
+                                <Button asChild variant="secondary" size="sm" className="w-full">
+                                    <Link href={`/view/${restaurant.id}`} target="_blank">
+                                        <ExternalLink className="h-4 w-4 mr-2" />
+                                        View
+                                    </Link>
+                                </Button>
+                                <Button asChild size="sm" className="w-full">
+                                    <Link href={`/share/${restaurant.id}`}>
+                                        <QrCode className="h-4 w-4 mr-2" />
+                                        QR
+                                    </Link>
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
