@@ -6,7 +6,7 @@ import { dictionary, Language } from '@/constants/dictionaries';
 import { getLanguageFromCode } from '@/utils/language';
 
 export function useLanguage() {
-    const [language, setLanguage] = useState<Language>('ko');
+    const [language, setLanguage] = useState<Language>('en');
 
     useEffect(() => {
         // Robust browser language detection
