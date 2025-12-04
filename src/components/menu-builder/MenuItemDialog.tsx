@@ -56,31 +56,58 @@ export function MenuItemDialog({ open, onOpenChange, onSubmit, initialData, mode
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent>
+            <DialogContent className="sm:max-w-[425px] w-[95vw] max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>{mode === "add" ? "Add New Item" : "Edit Item"}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
-                        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Burger" />
+                        <Input
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Burger"
+                            className="h-10 text-base"
+                        />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="price">Price</Label>
-                        <Input id="price" type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="10000" />
+                        <Input
+                            id="price"
+                            type="number"
+                            inputMode="decimal"
+                            pattern="[0-9]*"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            placeholder="10000"
+                            className="h-10 text-base"
+                        />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="description">Description</Label>
-                        <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Delicious beef burger..." />
+                        <Textarea
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Delicious beef burger..."
+                            className="min-h-[100px] text-base"
+                        />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="image">Image URL</Label>
-                        <Input id="image" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://..." />
+                        <Input
+                            id="image"
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            placeholder="https://..."
+                            className="h-10 text-base"
+                        />
                     </div>
                 </div>
-                <DialogFooter>
-                    <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-                    <Button onClick={handleSubmit}>Save</Button>
+                <DialogFooter className="gap-2 sm:gap-0">
+                    <Button variant="outline" onClick={() => onOpenChange(false)} className="h-10">Cancel</Button>
+                    <Button onClick={handleSubmit} className="h-10">Save</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
